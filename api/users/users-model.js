@@ -4,7 +4,7 @@ function find() {
    return db("users as u")
    .innerJoin("roles as r", "r.role_id", "u.role_id")
    .select("u.user_id", "u.username", "r.role_name as role")
-  /**
+  /**==============================================================================
     You will need to join two tables.
     Resolves to an ARRAY with all users.
 
@@ -20,15 +20,15 @@ function find() {
         "role_name": "instructor"
       }
     ]
-   */
+   ===============================================================================*/
 }
 
 function findBy(filter) {
    return db("users as u")
       .innerJoin("roles as r", "r.role_id", "u.role_id")
 		.where("u.username", filter)
-		.first("u.user_id", "u.username", "u.password", "r.role_name as role")
-  /**
+		.first("u.user_id", "u.username", "u.password", "r.role_name")
+  /**==============================================================================
     You will need to join two tables.
     Resolves to an ARRAY with all users that match the filter condition.
 
@@ -40,7 +40,7 @@ function findBy(filter) {
         "role_name": "admin",
       }
     ]
-   */
+   ===============================================================================*/
 }
 
 function findById(user_id) {
@@ -48,7 +48,7 @@ function findById(user_id) {
       .innerJoin("roles as r", "r.role_id", "u.role_id")
       .where("u.user_id", user_id)
       .first("u.user_id", "u.username", "r.role_name")
-  /**
+  /**==============================================================================
     You will need to join two tables.
     Resolves to the user with the given user_id.
 
@@ -57,10 +57,10 @@ function findById(user_id) {
       "username": "sue",
       "role_name": "instructor"
     }
-   */
+   ===============================================================================*/
 }
 
-/**
+  /**==============================================================================
   Creating a user requires a single insert (into users) if the role record with the given
   role_name already exists in the db, or two inserts (into roles and then into users)
   if the given role_name does not exist yet.
@@ -77,7 +77,7 @@ function findById(user_id) {
     "username": "anna",
     "role_name": "team lead"
   }
- */
+   ===============================================================================*/
 async function add({ username, password, role_name }) { // done for you
   let created_user_id
   await db.transaction(async trx => {
